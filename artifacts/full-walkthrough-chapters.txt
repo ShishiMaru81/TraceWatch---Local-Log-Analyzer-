@@ -1,0 +1,21 @@
+00:00:00.000 Tracewatch: the complete guide
+00:00:29.123 What the challenge requires
+00:00:56.082 One-time setup
+00:01:22.444 Launch the application
+00:01:50.077 Upload, analyze, review, export
+00:02:21.623 Understand the progress display
+00:02:54.635 The measured sample result
+00:03:29.416 Read the findings carefully
+00:04:04.397 Follow a chain across the file
+00:04:33.154 Separate attacks from normal failures
+00:05:06.141 The end-to-end architecture
+00:05:35.928 Why this local model?
+00:06:08.874 Account for every token
+00:06:41.686 Use the exact tokenizer and prompt
+00:07:12.607 Split without losing source coordinates
+00:07:42.564 Keep more history than the prompt can hold
+00:08:15.475 Make failures recoverable
+00:08:52.900 Treat logs as data, never instructions
+00:09:25.650 What AI got wrong, and what changed
+00:10:03.005 Verification and an interview change
+00:10:44.095 Limits and the next steps

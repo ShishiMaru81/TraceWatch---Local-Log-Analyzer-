@@ -222,11 +222,23 @@ RAM. `scripts/analyze_file.py` runs real inference through the HTTP API.
   revisions, budget plan, real mistakes and corrections.
 - [`artifacts/walkthrough.mp4`](artifacts/walkthrough.mp4): short narrated code
   and architecture walkthrough, not a claimed browser recording.
+- [`artifacts/full-walkthrough.mp4`](artifacts/full-walkthrough.mp4): extended
+  11-minute-29-second English guide with 21 chapters, narration, and burned-in captions. Covers
+  setup, usage, real findings, architecture, code, recovery and limitations.
+- [`Speech MP3`](artifacts/full-walkthrough-speech.mp3),
+  [`subtitles`](artifacts/full-walkthrough.srt),
+  [`transcript`](artifacts/full-walkthrough-transcript.md), and
+  [`chapter timestamps`](artifacts/full-walkthrough-chapters.txt).
+- [`Extended media validation`](artifacts/full-walkthrough-validation.md):
+  codec, timing, caption, layout and audio checks.
 - [`docs/progress.md`](docs/progress.md): implementation and review record.
 
 To regenerate the optional video on Windows, install Pillow (`pip install
 Pillow`) and ffmpeg, then run `python scripts/make_walkthrough.py` after a complete
 verified analysis. Narration uses the local Windows System.Speech voice.
+Generate the extended guide and its audio/caption companions with
+`python scripts/make_full_walkthrough.py`. Its visuals are illustrations,
+source excerpts and verified saved results; it does not capture browser input.
 
 Known limits: small-model false positives/negatives; rules miss novel attacks;
 only common JSON/access/SSH formats are parsed; missing host/account data reduces

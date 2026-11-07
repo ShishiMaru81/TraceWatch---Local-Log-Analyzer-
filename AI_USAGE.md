@@ -187,3 +187,18 @@ heuristics; HTTP 5xx alone never proves an attack. RAM figures are sampled RSS o
 the development host, not an enforced full-machine 4 GB test. The Docker cap is
 provided but untested. The video is an offline-narrated source/architecture
 walkthrough, not evidence of browser testing.
+
+## Extended video and speech
+
+The extended guide was authored with Codex assistance from the current source
+and the saved verified sample audit. `scripts/full_walkthrough_story.py` contains
+the narration; `scripts/make_full_walkthrough.py` draws the workflow diagrams,
+code excerpts and evidence tables. Windows System.Speech synthesizes English
+narration locally. Caption timing is based on the actual duration of each
+individually synthesized speech segment. ffmpeg creates the full-HD MP4 and a
+separate MP3. The SRT, transcript and chapter list accompany the video.
+
+The visuals explicitly identify themselves as illustrations, saved evidence and
+code. Browser recording remains unavailable; no alternative browser automation
+was used. The extended video adds no runtime model calls, cloud speech service,
+or changes to the analyzer's behavior.

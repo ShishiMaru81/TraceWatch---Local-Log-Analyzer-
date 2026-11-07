@@ -14,6 +14,8 @@ artifacts/*.png
 artifacts/*.mp4
 artifacts/*.webm
 artifacts/walkthrough-assets/
+artifacts/full-walkthrough-assets/
 !artifacts/verification.json
 !artifacts/walkthrough.mp4
+!artifacts/full-walkthrough.mp4
 !artifacts/dashboard.png

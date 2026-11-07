@@ -1,0 +1,435 @@
+1
+00:00:00,000 --> 00:00:06,068
+Welcome to this complete guide to Tracewatch, a local AI security log analyzer.
+
+2
+00:00:06,068 --> 00:00:14,012
+This video explains how to set it up, use it, interpret its findings, and understand the implementation.
+
+3
+00:00:14,012 --> 00:00:21,385
+You will also see the measured results, the model mistakes that were corrected, and the remaining limitations.
+
+4
+00:00:21,385 --> 00:00:29,123
+The visuals are workflow illustrations, code excerpts, and saved evidence, rather than a live browser recording.
+
+5
+00:00:29,123 --> 00:00:37,691
+The application must work on a machine with four gigabytes of total memory, two virtual CPU cores, and no GPU.
+
+6
+00:00:37,691 --> 00:00:41,500
+The log is larger than the model can read in one call.
+
+7
+00:00:41,500 --> 00:00:50,513
+Every call has a strict two thousand and forty eight token budget, including the prompt, saved context, log text, and answer.
+
+8
+00:00:50,513 --> 00:00:56,082
+After setup, runtime analysis must work without cloud AI services.
+
+9
+00:00:56,082 --> 00:00:59,896
+Start by opening PowerShell in the project folder.
+
+10
+00:00:59,896 --> 00:01:05,994
+Create a Python virtual environment and install the requirements using the commands on screen.
+
+11
+00:01:05,994 --> 00:01:09,872
+Then run the setup script while connected to the internet.
+
+12
+00:01:09,872 --> 00:01:16,675
+It downloads the pinned CPU runtime and model weights, and checks their SHA two fifty six hashes.
+
+13
+00:01:16,675 --> 00:01:22,444
+This download is needed only during setup, not each time you analyze a log.
+
+14
+00:01:22,444 --> 00:01:29,752
+For everyday use, open PowerShell, change to the project folder, and run the launch script.
+
+15
+00:01:29,752 --> 00:01:34,006
+Use the same Python environment that you used during setup.
+
+16
+00:01:34,006 --> 00:01:38,100
+The backend starts one local model server automatically.
+
+17
+00:01:38,100 --> 00:01:44,008
+Open the localhost address shown on screen, and wait until the engine reports Ready.
+
+18
+00:01:44,008 --> 00:01:50,077
+Keep the terminal running while using the application, and avoid launching a second backend.
+
+19
+00:01:50,077 --> 00:01:56,345
+Choose a dot log or dot text file using the upload area, or drag a file onto it.
+
+20
+00:01:56,345 --> 00:02:01,869
+The file must be nonempty UTF eight text and no larger than five mebibytes.
+
+21
+00:02:01,869 --> 00:02:05,758
+Click Start analysis once the local engine is ready.
+
+22
+00:02:05,758 --> 00:02:11,891
+After processing, expand each finding to inspect the evidence and suggested action.
+
+23
+00:02:11,891 --> 00:02:16,445
+Export report downloads the combined result as JSON.
+
+24
+00:02:16,445 --> 00:02:21,623
+Recent analyses lets you reopen saved results without repeating inference.
+
+25
+00:02:21,623 --> 00:02:29,106
+Lines processed shows source coverage, while local AI calls shows completed extraction and synthesis calls.
+
+26
+00:02:29,106 --> 00:02:36,635
+Potential findings are added during the final assessment phase, so an early zero does not mean the file is safe.
+
+27
+00:02:36,635 --> 00:02:43,183
+Processing details exposes token counts, call duration, status, and retries.
+
+28
+00:02:43,183 --> 00:02:47,842
+The memory indicator measures the backend and its owned model process.
+
+29
+00:02:47,842 --> 00:02:54,635
+If a call fails repeatedly, the application preserves completed work and offers Resume analysis.
+
+30
+00:02:54,635 --> 00:02:59,579
+The supplied sample contained 258 physical lines.
+
+31
+00:02:59,579 --> 00:03:04,982
+The completed run used 34 map calls and 5 final assessment calls.
+
+32
+00:03:04,982 --> 00:03:11,851
+It produced 5 merged findings, with no failed calls and no source coverage gaps or overlaps.
+
+33
+00:03:11,851 --> 00:03:17,054
+Peak sampled combined resident memory was 1.72 gibibytes.
+
+34
+00:03:17,054 --> 00:03:24,632
+Recorded active analysis time was about nineteen minutes, excluding downtime and uncommitted interrupted calls.
+
+35
+00:03:24,632 --> 00:03:29,416
+These are measurements of this sample, not an accuracy benchmark.
+
+36
+00:03:29,416 --> 00:03:40,599
+The report includes a possible account compromise, SQL injection attempts, endpoint scanning, repeated denied access, and an unusual request burst.
+
+37
+00:03:40,599 --> 00:03:48,182
+Each finding includes its severity, source identity, reason, suggested action, and original line references.
+
+38
+00:03:48,182 --> 00:03:52,636
+Possible compromise does not mean confirmed account takeover.
+
+39
+00:03:52,636 --> 00:04:00,279
+Likewise, a suspicious SQL payload is evidence of an attempt, not proof that a database executed it.
+
+40
+00:04:00,279 --> 00:04:04,397
+Human review remains necessary before taking action.
+
+41
+00:04:04,397 --> 00:04:08,476
+The most important example is the authentication chain.
+
+42
+00:04:08,476 --> 00:04:15,574
+The same source IP, host, and account have failed login events near the beginning and throughout the middle of the file.
+
+43
+00:04:15,574 --> 00:04:22,067
+There are twelve failures before an explicit successful login at line one hundred and ninety six.
+
+44
+00:04:22,067 --> 00:04:27,721
+The application combines these into one high severity possible compromise finding.
+
+45
+00:04:27,721 --> 00:04:33,154
+It does not create separate reports that forget the earlier evidence between chunks.
+
+46
+00:04:33,154 --> 00:04:37,613
+Detection uses conservative, source-backed policies.
+
+47
+00:04:37,613 --> 00:04:42,347
+Five failed logins can support repeated authentication attempts.
+
+48
+00:04:42,347 --> 00:04:51,605
+SQL payload syntax, several sensitive-path probes, or repeated non-login authorization denials can support other candidates.
+
+49
+00:04:51,605 --> 00:04:58,298
+A short request burst needs both a high count and repeated rate-limit responses under its short-window rule.
+
+50
+00:04:58,298 --> 00:05:06,141
+A database timeout, a deployment error, or a successful health check alone is not treated as a confirmed attack.
+
+51
+00:05:06,141 --> 00:05:12,419
+FastAPI receives the upload as a stream and writes numbered source lines into SQLite.
+
+52
+00:05:12,419 --> 00:05:16,538
+A conservative parser builds an event ledger from the source.
+
+53
+00:05:16,538 --> 00:05:20,342
+The packer prepares bounded chunks for the local model.
+
+54
+00:05:20,342 --> 00:05:26,820
+Model observations are checked against their cited source lines and saved after each successful call.
+
+55
+00:05:26,820 --> 00:05:35,928
+Finally, full-file correlation creates candidates, and the local model assesses combined evidence before the main report is produced.
+
+56
+00:05:35,928 --> 00:05:43,881
+The final model is Qwen two point five, one point five billion parameters, in Q four K M quantization.
+
+57
+00:05:43,881 --> 00:05:48,434
+The weights occupy about one point one two gigabytes on disk.
+
+58
+00:05:48,434 --> 00:05:57,827
+Llama dot C P P runs the model with two generation threads, two batch threads, no GPU layers, and one inference slot.
+
+59
+00:05:57,827 --> 00:06:03,776
+One global worker serves the job queue, avoiding several model copies in memory.
+
+60
+00:06:03,776 --> 00:06:08,874
+Model storage size and actual process memory are different measurements.
+
+61
+00:06:08,874 --> 00:06:13,938
+The input ceiling is one thousand five hundred and sixty eight tokens.
+
+62
+00:06:13,938 --> 00:06:20,322
+That includes the rendered chat template, instructions, source fragments, and saved facts.
+
+63
+00:06:20,322 --> 00:06:28,300
+Four hundred and forty eight tokens are reserved for the model response, and thirty two tokens remain as a safety margin.
+
+64
+00:06:28,300 --> 00:06:34,438
+Relevant prior facts can use up to one hundred and sixty tokens inside the input budget.
+
+65
+00:06:34,438 --> 00:06:41,686
+The source space is measured dynamically; it is never estimated using a fixed characters-per-token ratio.
+
+66
+00:06:41,686 --> 00:06:46,515
+This excerpt shows the important boundary between budgeting and inference.
+
+67
+00:06:46,515 --> 00:06:55,522
+The backend asks the local server to apply the model chat template, then tokenizes the rendered prompt using the tokenizer embedded in the model.
+
+68
+00:06:55,522 --> 00:07:00,096
+It sends those exact token IDs to the completion endpoint.
+
+69
+00:07:00,096 --> 00:07:05,159
+This avoids counting one prompt and accidentally submitting a different template.
+
+70
+00:07:05,159 --> 00:07:12,607
+The backend checks the budget before inference and rejects responses that report truncation or reach the generation limit.
+
+71
+00:07:12,607 --> 00:07:16,366
+The chunk packer prefers complete physical lines.
+
+72
+00:07:16,366 --> 00:07:23,769
+It also tries to move indented multiline continuations with their parent entry when that entry can fit in a new chunk.
+
+73
+00:07:23,769 --> 00:07:28,797
+An oversized line is divided into Unicode-safe character fragments.
+
+74
+00:07:28,797 --> 00:07:33,881
+Every fragment keeps its original physical line number and character offset.
+
+75
+00:07:33,881 --> 00:07:42,564
+The audit reconstructs coverage and compares every fragment to its source, so dropped text and overlapping coordinates can be detected.
+
+76
+00:07:42,564 --> 00:07:48,862
+The context window is small, but the investigation history is not limited to that window.
+
+77
+00:07:48,862 --> 00:07:54,095
+SQLite retains the full event ledger and validated model observations.
+
+78
+00:07:54,095 --> 00:07:59,504
+Only a bounded selection of relevant earlier facts enters a later chunk prompt.
+
+79
+00:07:59,504 --> 00:08:06,367
+Final correlation uses the complete ledger and scopes authentication by IP, host, and account.
+
+80
+00:08:06,367 --> 00:08:15,475
+The final model receives aggregate counts and representative early, middle, and late evidence, rather than a lossy summary of earlier summaries.
+
+81
+00:08:15,475 --> 00:08:18,644
+Each request is saved before inference.
+
+82
+00:08:18,644 --> 00:08:26,157
+After success, the model reply, validated observations, and source checkpoint commit together.
+
+83
+00:08:26,157 --> 00:08:33,520
+Timeouts, invalid JSON, invalid schemas, and incomplete replies retry up to three times.
+
+84
+00:08:33,520 --> 00:08:39,789
+Retry exhaustion marks the job as needing attention, while completed work remains saved.
+
+85
+00:08:39,789 --> 00:08:45,722
+A real restart test retained thirteen completed model calls and continued the pending call.
+
+86
+00:08:45,722 --> 00:08:52,900
+A model and prompt fingerprint prevents unsafe reuse of saved token IDs after a configuration change.
+
+87
+00:08:52,900 --> 00:09:00,153
+The sample includes submitted text asking the analyzer to report everything as safe and remove failed-login evidence.
+
+88
+00:09:00,153 --> 00:09:03,472
+That text remains untrusted log data.
+
+89
+00:09:03,472 --> 00:09:11,594
+The model has no tools or command execution interface, and literal chat-control delimiters are escaped in prompt data.
+
+90
+00:09:11,594 --> 00:09:17,877
+The interface displays source text using text content, not interpreted HTML.
+
+91
+00:09:17,877 --> 00:09:25,650
+These boundaries reduce exposure, but they are not a proof that a small language model can never be influenced semantically.
+
+92
+00:09:25,650 --> 00:09:33,078
+The initial half-billion-parameter model made unsupported line claims and confused attack types in its final assessment.
+
+93
+00:09:33,078 --> 00:09:38,472
+For example, it discussed login events while assessing SQL injection.
+
+94
+00:09:38,472 --> 00:09:44,145
+Source checks rejected unsupported citations rather than turning them into findings.
+
+95
+00:09:44,145 --> 00:09:53,153
+The implementation moved to the larger quantized model, clearer observation definitions, and attack-specific assessment criteria.
+
+96
+00:09:53,153 --> 00:09:58,617
+The final sample still had 148 rejected map proposals.
+
+97
+00:09:58,617 --> 00:10:03,005
+Those failures remain visible in the audit instead of being hidden.
+
+98
+00:10:03,005 --> 00:10:10,583
+The automated suite passed 22 tests, and the published commit also passed GitHub continuous integration.
+
+99
+00:10:10,583 --> 00:10:21,936
+Tests cover token limits, Unicode fragments, invalid uploads, broken JSON, retries, restart behavior, duplicate events, and host-safe correlation.
+
+100
+00:10:21,936 --> 00:10:26,744
+A separate audit checks real source coverage and actual call budgets.
+
+101
+00:10:26,744 --> 00:10:37,447
+For a small interview change, a detection threshold can be edited in the policy module, paired with a meaningful regression test, and verified by running the
+
+102
+00:10:37,447 --> 00:10:38,916
+suite.
+
+103
+00:10:38,916 --> 00:10:44,095
+This video does not claim to demonstrate an unperformed live code change.
+
+104
+00:10:44,095 --> 00:10:52,503
+Tracewatch is an auditable hybrid of local model analysis and conservative rules, not a complete security monitoring system.
+
+105
+00:10:52,503 --> 00:11:00,091
+Novel attacks and unsupported log formats can be missed, and threshold choices need operational context.
+
+106
+00:11:00,091 --> 00:11:07,819
+The memory result is sampled process memory, not proof from a complete four-gigabyte virtual machine stress test.
+
+107
+00:11:07,819 --> 00:11:12,582
+Docker resource limits and browser interaction remain unverified.
+
+108
+00:11:12,582 --> 00:11:21,895
+The repository includes source, setup instructions, AI usage notes, tests, measured evidence, and both walkthrough videos.
+
+109
+00:11:21,895 --> 00:11:28,684
+Start with the README, launch the app, and reopen the saved sample under Recent analyses.

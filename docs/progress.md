@@ -62,3 +62,17 @@ Plan: docs/superpowers/plans/2026-11-07-log-analyzer.md
   198.48s narrated architecture/code walkthrough complete. Video has H.264/AAC
   streams, 1600x900 frame size, and passes full ffmpeg decode. Intro/results
   frames visually inspected; this is not a browser recording.
+
+## Extended video requested by user
+
+- Created an 11m29s English full guide, 1920x1080 at 25fps, with 21 chapters and
+  109 burned-in caption segments. Narration uses offline Windows System.Speech.
+- Added standalone speech MP3, SRT, complete transcript, and chapter timestamps.
+  Each caption is timed to its own synthesized speech segment's actual duration.
+- Visuals include setup/use instructions, actual findings, cross-part timeline,
+  architecture, token budget, source excerpts, failure recovery, mistakes and
+  limits. They explicitly identify themselves as illustrations/saved evidence;
+  no browser capture or alternative browser automation was performed.
+- Preview generation checked all scene/caption bounds. Selected workflow,
+  findings, architecture, budget, timeline, code and closing frames were viewed.
+- No analyzer behavior or model results changed for this media-only addition.
