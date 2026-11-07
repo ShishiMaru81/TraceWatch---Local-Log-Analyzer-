@@ -1,0 +1,19 @@
+services:
+  analyzer:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - analyzer-data:/app/data
+    mem_limit: 3g
+    cpus: 2.0
+    pids_limit: 128
+    init: true
+    restart: unless-stopped
+    networks:
+      - offline
+networks:
+  offline:
+    internal: true
+volumes:
+  analyzer-data:

@@ -1,0 +1,22 @@
+Command: python -m pytest tests -q
+Result: 22 passed in 4.75s
+Exit code: 0
+
+Additional checks:
+node --check static/app.js -> exit 0
+Literal JavaScript element IDs missing from HTML -> none
+
+Tests use fault-injection clients only in tests. Real runtime uses local GGUF.
+Browser interaction was not verified: localhost browser permission denied.
+
+Real local-model verification:
+python scripts/verify_run.py -> exit 0
+258/258 lines; 34 map + 5 synthesis calls; 0 gaps/overlaps; 0 failed calls.
+Max input + output reserve + margin: 2047/2048.
+Peak combined backend/model RSS: 1846427648 bytes (sampled).
+HTTP report export, source evidence and static assets -> PASS.
+
+Walkthrough verification:
+198.48 seconds; 1600x900 H.264 video + AAC narration; 3455414 bytes.
+ffmpeg full decode -> exit 0.
+SHA256: 9a5b325947c8be7f7eac0756af8df1cba4af61d49dff66e5fa13cb70b7779b96.

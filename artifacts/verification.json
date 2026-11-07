@@ -1,0 +1,140 @@
+{
+  "job_id": "d86d6a4785ef4caeb004c26232dd1e56",
+  "filename": "Cultive8_Workspace_Agrigen_Server.log",
+  "source_sha256": "2f81f924c06fe8ed848cd51df31c86c914a514a3233c4f11eb2986dbc3d8bd45",
+  "status": "completed",
+  "total_lines": 258,
+  "bytes": 94398,
+  "analysis_config": {
+    "model_sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+    "prompt_version": "4",
+    "model_name": "Qwen2.5 1.5B Instruct",
+    "quantization": "Q4_K_M"
+  },
+  "facts_version": 2,
+  "completed_lines": 258,
+  "map_calls": 34,
+  "reduce_calls": 5,
+  "failed_calls": 0,
+  "incomplete_calls": 0,
+  "max_input_tokens": 1567,
+  "max_input_plus_reserved_output_and_margin": 2047,
+  "max_actual_input_plus_output": 1616,
+  "output_reserve": 448,
+  "safety_margin": 32,
+  "context_limit": 2048,
+  "elapsed_seconds": 1113.68,
+  "elapsed_note": "Persisted active analysis time; excludes downtime and uncommitted interrupted-call time.",
+  "peak_backend_and_model_rss_bytes": 1846427648,
+  "validated_model_observations": {
+    "auth_failure": 10,
+    "unauthorized": 2,
+    "auth_success": 1,
+    "sql_injection": 1
+  },
+  "rejected_model_observations": 148,
+  "findings": [
+    {
+      "attack_type": "SQL injection attempt",
+      "severity": "Medium",
+      "ip": "203.0.113.72",
+      "host": "agrigen.example.test",
+      "account": "",
+      "lines": [
+        29,
+        30,
+        32,
+        222
+      ],
+      "counts": {
+        "payload_requests": 4
+      },
+      "status": "accepted"
+    },
+    {
+      "attack_type": "Unusual request rate",
+      "severity": "Medium",
+      "ip": "203.0.113.155",
+      "host": "agrigen.example.test",
+      "account": "",
+      "lines": [
+        159,
+        160,
+        162,
+        163,
+        165,
+        166,
+        167,
+        169,
+        170
+      ],
+      "counts": {
+        "requests_in_window": 12,
+        "window_seconds": 5,
+        "rate_limited_responses": 9
+      },
+      "status": "accepted"
+    },
+    {
+      "attack_type": "Repeated unauthorized access",
+      "severity": "Medium",
+      "ip": "203.0.113.90",
+      "host": "cultive8.example.test",
+      "account": "",
+      "lines": [
+        54,
+        99,
+        101,
+        102
+      ],
+      "counts": {
+        "denied_requests": 4
+      },
+      "status": "accepted"
+    },
+    {
+      "attack_type": "Possible account compromise",
+      "severity": "High",
+      "ip": "203.0.113.44",
+      "host": "cultive8-workspace.example.test",
+      "account": "workspace.admin",
+      "lines": [
+        5,
+        23,
+        35,
+        50,
+        80,
+        108,
+        123,
+        153,
+        196
+      ],
+      "counts": {
+        "failed_logins": 12,
+        "later_success_line": 196
+      },
+      "status": "accepted"
+    },
+    {
+      "attack_type": "Endpoint scanning",
+      "severity": "Medium",
+      "ip": "203.0.113.90",
+      "host": "cultive8.example.test",
+      "account": "",
+      "lines": [
+        54,
+        60,
+        99,
+        101
+      ],
+      "counts": {
+        "probe_requests": 4,
+        "distinct_paths": 4
+      },
+      "status": "accepted"
+    }
+  ],
+  "coverage_errors": [],
+  "browser_qa": "Not performed: localhost browser permission denied",
+  "resource_limit_note": "RSS sampled on development host; not a full 4 GB VM or cgroup peak-memory proof."
+}
