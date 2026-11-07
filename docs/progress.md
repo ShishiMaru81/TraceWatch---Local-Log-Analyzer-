@@ -76,3 +76,15 @@ Plan: docs/superpowers/plans/2026-11-07-log-analyzer.md
 - Preview generation checked all scene/caption bounds. Selected workflow,
   findings, architecture, budget, timeline, code and closing frames were viewed.
 - No analyzer behavior or model results changed for this media-only addition.
+
+## Slides and speaking script requested by user
+
+- Removed both MP4 videos and standalone MP3 from the current GitHub tree at
+  commit 99fe602. Kept local copies; ordinary Git history still contains the
+  earlier media commits. No history rewrite or force-push performed.
+- Prepared an editable 21-slide presentation matching the guide, with a spoken
+  script in each slide's speaker notes and a separate presenter-speech.md.
+- The slides and speaking script are delivered directly in the chat; local
+  copies of the outline and script are excluded from Git tracking.
+- All 21 slides rendered and individually inspected. Each has matching speaker
+  notes; the separate speech script has 21 corresponding sections.

@@ -223,7 +223,8 @@ RAM. `scripts/analyze_file.py` runs real inference through the HTTP API.
 - [`docs/progress.md`](docs/progress.md): implementation and review record.
 
 Video and recorded-audio files are excluded from the current source tree.
-Presentation slides and a prepared speaking script are provided separately.
+The editable presentation and prepared speaking script are delivered separately
+in the chat, with matching speaker notes on every slide.
 
 Known limits: small-model false positives/negatives; rules miss novel attacks;
 only common JSON/access/SSH formats are parsed; missing host/account data reduces

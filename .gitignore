@@ -19,3 +19,5 @@ artifacts/full-walkthrough-assets/
 !artifacts/verification.json
 !artifacts/dashboard.png
 .presentation-build/
+artifacts/presenter-speech.md
+artifacts/slides-outline.md
